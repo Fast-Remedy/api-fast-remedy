@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Response} from 'express';
 import cors from 'cors';
 import './database/connect';
 import routes from './routes';
@@ -9,6 +9,10 @@ const port = 3333;
 app.use(express.json());
 app.use(cors());
 app.use(routes);
+
+app.get('/', (response: Response) => {
+    return response.json('Success');
+});
 
 app.listen(process.env.PORT || port, () => {
     console.log('Server Running');
