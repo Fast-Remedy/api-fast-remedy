@@ -10,10 +10,6 @@ app.use(express.json());
 app.use(cors());
 app.use(routes);
 
-app.get('/', (response: Response) => {
-    return response.json('Success');
-});
-
 app.listen(process.env.PORT || port, () => {
     console.log('Server Running');
 });
