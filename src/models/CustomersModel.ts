@@ -1,12 +1,15 @@
 import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
-    registrationDateCustomer: String,
+    registrationDateCustomer: Date,
     phoneCustomer: String,
     nameCustomer: String,
     passwordCustomer: String,
-    emailCustomer: String,
-    cpfCustomer: Date,
+    emailCustomer: {
+        type: String,
+        unique: true
+    },
+    cpfCustomer: String,
 });
 
 const CustomersModel = mongoose.model('Customers', Schema);
