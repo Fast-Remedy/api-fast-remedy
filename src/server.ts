@@ -1,10 +1,10 @@
-import express, {Response} from 'express';
+import express from 'express';
 import cors from 'cors';
 import './database/connect';
 import routes from './routes';
 
 const app = express();
-const port = 3000;
+const port = 3333;
 
 app.use(express.json());
 app.use(cors());
