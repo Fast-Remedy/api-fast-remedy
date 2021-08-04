@@ -1,13 +1,12 @@
 import CustomersModel from '../models/CustomersModel';
-import {NextFunction, Request, Response} from "express";
 
-export async function uniqueEmailCustomer(request: Request, response: Response, next: NextFunction){
-    const { emailCustomer } = request.body;
+export async function uniqueEmailCustomer(req, res, next){
+    const { emailCustomer } = req.body;
 
     const hasEmail = await CustomersModel.findOne({emailCustomer});
 
     if (hasEmail){
-        return response.status(412).json({error: "Esse email já está cadastrado."});
+        return res.status(412).json({error: "Esse email já está cadastrado."});
     }
 
     next();
