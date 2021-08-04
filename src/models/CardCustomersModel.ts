@@ -5,7 +5,7 @@ const Schema = new mongoose.Schema({
     mainCardCustomer: Boolean,
     cardOwnerCpfCustomer: String,
     cardOwnerNameCustomer: String,
-    cardCvvCustomer: Number,
+    cardCvvCustomer: String,
     cardExpirationDateCustomers: String,
     cardNumberCustomers: String,
     cardTypeCustomers: String,

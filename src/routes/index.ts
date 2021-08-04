@@ -1,23 +1,26 @@
-import Router, {request, response} from 'express';
-import RegisterCustomersController from '../controllers/RegisterCustomersController';
-import {body} from 'express-validator';
-import regex from "../validations/customersValidation";
+import Router from 'express';
+import CustomersController from '../controllers/CustomersController';
 import {uniqueEmailCustomer} from "../middlewares/uniqueEmail";
 import {uniqueCpfCustomer} from "../middlewares/uniqueCpf";
+import {existIdCustomer} from "../middlewares/existId";
 const routes = new Router();
 
 /* Login */
 // routes.use('/api/register');
 routes.post('/api/register/customers',
-    body('emailCustomer').exists().isEmail().normalizeEmail(),
-    body('passwordCustomer').exists().isLength({ min: 8}),
-    body('registrationDateCustomer').exists(),
-    body('nameCustomer').exists(),
-    body('cpfCustomer').exists().matches(regex.cpf),
-    body('phoneCustomer').exists().matches(regex.phone),
     uniqueEmailCustomer,
     uniqueCpfCustomer,
-    RegisterCustomersController.createCustomers
+    CustomersController.createCustomers
+);
+
+routes.post('/api/register/address/customers',
+    existIdCustomer,
+    CustomersController.createAddressCustomer
+);
+
+routes.post('/api/register/card/customers',
+    existIdCustomer,
+    CustomersController.createCardCustomers
 );
 
 export default routes;
