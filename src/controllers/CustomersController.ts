@@ -5,13 +5,13 @@ import crypto from 'crypto';
 import validate from '../utils/validate';
 
 class CustomersController {
-    static async createCustomers (request: Request, response: Response) {
+    static async createCustomers (req, res) {
         // @ts-ignore
-        let { registrationDateCustomer, phoneCustomer, nameCustomer, passwordCustomer, emailCustomer, cpfCustomer } = request.body;
+        let { registrationDateCustomer, phoneCustomer, nameCustomer, passwordCustomer, emailCustomer, cpfCustomer } = req.body;
 
         const encryptedPassword = crypto.createHmac('sha512', `${process.env.ENCRYPT_KEY}`).update(passwordCustomer).digest('base64');
 
-        await validate(request, response);
+        await validate(req, res);
 
         try {
             await CustomersModel.create({
@@ -23,17 +23,17 @@ class CustomersController {
                 cpfCustomer,
             });
 
-            return response.json();
+            return res.json();
         } catch (error){
             // @ts-ignore
-            return response.status(500).json({message: "Não foi possível registrar o usuário."})
+            return res.status(500).json({message: "Não foi possível registrar o usuário."})
         }
     }
 
 
-    static async createAddressCustomer (request: Request, response: Response) {
+    static async createAddressCustomer (req, res) {
         // @ts-ignore
-        let { postalCodeCustomer, streetNameCustomer, streetNumberCustomer, complementCustomer, neighborhoodCustomer, cityCustomer, stateCustomer,mainAddressCustomer,              idCustomer} = request.body;
+        let { postalCodeCustomer, streetNameCustomer, streetNumberCustomer, complementCustomer, neighborhoodCustomer, cityCustomer, stateCustomer,mainAddressCustomer, idCustomer} = req.body;
 
         try {
             await AddressCustomersModel.create({
@@ -48,20 +48,20 @@ class CustomersController {
                 idCustomer
             });
 
-            return response.json();
+            return res.json();
         } catch (error) {
             // @ts-ignore
-            return response.status(500).json({message: "Não foi possível registrar o endereço do usuário."})
+            return res.status(500).json({message: "Não foi possível registrar o endereço do usuário."})
         }
 
     }
 
-    static async createCardCustomers (request: Request, response: Response) {
+    static async createCardCustomers (req, res) {
         // @ts-ignore
-        let { cardTypeCustomers, cardNumberCustomers, cardExpirationDateCustomers, cardCvvCustomer, cardOwnerNameCustomer, cardOwnerCpfCustomer, mainCardCustomer, idCustomer} = request.body;
+        let { cardTypeCustomers, cardNumberCustomers, cardExpirationDateCustomers, cardCvvCustomer, cardOwnerNameCustomer, cardOwnerCpfCustomer, mainCardCustomer, idCustomer} = req.body;
 
         try {
-            await AddressCustomersModel.create({
+            await CardCustomersModel.create({
                 cardTypeCustomers,
                 cardNumberCustomers,
                 cardExpirationDateCustomers,
@@ -72,14 +72,57 @@ class CustomersController {
                 idCustomer
             });
 
-            return response.json();
+            return res.json();
         } catch (error) {
             // @ts-ignore
-            return response.status(500).json({message: "Não foi possível registrar o cartão do usuário."})
+            return res.status(500).json({message: "Não foi possível registrar o cartão do usuário."})
         }
 
     }
 
+    static async getCustomer (req, res) {
+        const {id} = req.params;
+        try {
+            const result = await CustomersModel.findById(id)
+                .select(
+                    ['_id',
+                    'registrationDateCustomer',
+                    'phoneCustomer',
+                    'nameCustomer',
+                    'emailCustomer',
+                    'cpfCustomer']
+                );
+            // @ts-ignore
+            return res.json(result);
+        } catch (error){
+            // @ts-ignore
+            return res.status(404).json({message: "Dados não encontrados."})
+        }
+    }
+
+    static async getCardCustomers (req, res) {
+        const {id} = req.params;
+        try {
+            const result = await CardCustomersModel.find({idCustomer: id});
+            // @ts-ignore
+            return res.json(result);
+        } catch (error) {
+            // @ts-ignore
+            return res.status(404).json({message: "Dados não encontrados."});
+        }
+    }
+
+    static async getAddressCustomers (req, res) {
+        const {id} = req.params;
+        try {
+            const result = await AddressCustomersModel.find({idCustomer: id});
+            // @ts-ignore
+            return res.json(result);
+        } catch (error) {
+            // @ts-ignore
+            return res.status(404).json({message: "Dados não encontrados."});
+        }
+    }
 }
 
 export default CustomersController;
