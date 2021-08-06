@@ -1,15 +1,42 @@
 import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
-    postalCodeCustomer: String,
-    streetNameCustomer: String,
-    streetNumberCustomer: String,
-    complementCustomer: String,
-    neighborhoodCustomer: String,
-    cityCustomer: String,
-    stateCustomer: String,
-    mainAddressCustomer: Boolean,
-    idCustomer: String
+    postalCodeCustomer: {
+        type: String,
+        required: true,
+    },
+    streetNameCustomer: {
+        type: String,
+        required: true,
+    },
+    streetNumberCustomer: {
+        type: String,
+        required: true,
+    },
+    complementCustomer: {
+        type: String,
+        required: true,
+    },
+    neighborhoodCustomer: {
+        type: String,
+        required: true,
+    },
+    cityCustomer: {
+        type: String,
+        required: true,
+    },
+    stateCustomer:{
+        type: String,
+        required: true,
+    },
+    mainAddressCustomer: {
+        type: Boolean,
+        required: true,
+    },
+    idCustomer: {
+        type: String,
+        required: true,
+    },
 
 });
 
