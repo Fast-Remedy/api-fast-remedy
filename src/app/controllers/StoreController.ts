@@ -1,52 +1,56 @@
-import AddressCustomersModel from '../models/AddressCustomersModel';
-import CardCustomersModel from '../models/CardCustomersModel';
-import CustomersModel from '../models/CustomersModel';
+import AddressStoresModel from '../../models/AddressStoresModel';
+import ProductsModel from '../../models/ProductsModel';
+import StoresModel from '../../models/StoresModel';
 import crypto from 'crypto';
 import validate from '../utils/validate';
-import generateToken from "../utils/generateToken";
+import generateToken from '../utils/generateToken';
+import base64_encoded from "../utils/base64Encoded";
 
 class CustomersController {
-    static async createCustomers (req, res) {
+    static async createStores (req, res) {
         // @ts-ignore
-        let { registrationDateCustomer, phoneCustomer, nameCustomer, passwordCustomer, emailCustomer, cpfCustomer } = req.body;
+        let { cnpjStore, emailStore, passwordStore, companyNameStore, tradingNameStore, phoneStore, deliveryFeeStore, deliveryEstimatedTimeStore, registrationDateStore } = req.body;
 
-        const encryptedPassword = crypto.createHmac('sha512', `${process.env.ENCRYPT_KEY}`).update(passwordCustomer).digest('base64');
+        const encryptedPassword = crypto.createHmac('sha512', `${process.env.ENCRYPT_KEY}`).update(passwordStore).digest('base64');
 
         await validate(req, res);
 
         try {
-            await CustomersModel.create({
-                registrationDateCustomer,
-                phoneCustomer,
-                nameCustomer,
-                passwordCustomer: encryptedPassword,
-                emailCustomer,
-                cpfCustomer,
+            await StoresModel.create({
+                cnpjStore,
+                emailStore,
+                passwordStore: encryptedPassword,
+                companyNameStore,
+                tradingNameStore,
+                phoneStore,
+                deliveryFeeStore,
+                deliveryEstimatedTimeStore,
+                registrationDateStore
             });
 
             return res.json();
         } catch (error){
             // @ts-ignore
-            return res.status(500).json({message: "Não foi possível registrar o usuário."})
+            console.log(error.message)
+            return res.status(500).json({message: "Não foi possível registrar a loja."})
         }
     }
 
 
-    static async createAddressCustomer (req, res) {
+    static async createAddressStores (req, res) {
         // @ts-ignore
-        let { postalCodeCustomer, streetNameCustomer, streetNumberCustomer, complementCustomer, neighborhoodCustomer, cityCustomer, stateCustomer,mainAddressCustomer, idCustomer} = req.body;
+        let { postalCodeStore, streetNameStore, streetNumberStore, complementStore, neighborhoodStore, cityStore, stateStore,idStore } = req.body;
 
         try {
-            await AddressCustomersModel.create({
-                postalCodeCustomer,
-                streetNameCustomer,
-                streetNumberCustomer,
-                complementCustomer,
-                neighborhoodCustomer,
-                cityCustomer,
-                stateCustomer,
-                mainAddressCustomer,
-                idCustomer
+            await AddressStoresModel.create({
+                postalCodeStore,
+                streetNameStore,
+                streetNumberStore,
+                complementStore,
+                neighborhoodStore,
+                cityStore,
+                stateStore,
+                idStore
             });
 
             return res.json();
@@ -57,31 +61,31 @@ class CustomersController {
 
     }
 
-    static async createCardCustomers (req, res) {
+    static async createProductStore (req, res) {
         // @ts-ignore
-        let { cardTypeCustomers, cardNumberCustomers, cardExpirationDateCustomers, cardCvvCustomer, cardOwnerNameCustomer, cardOwnerCpfCustomer, mainCardCustomer, idCustomer} = req.body;
+        let { categoryProduct, descriptionProduct, imageProduct, priceProduct, availabilityProduct, registrationDateProduct, idStore} = req.body;
 
         try {
-            await CardCustomersModel.create({
-                cardTypeCustomers,
-                cardNumberCustomers,
-                cardExpirationDateCustomers,
-                cardCvvCustomer,
-                cardOwnerNameCustomer,
-                cardOwnerCpfCustomer,
-                mainCardCustomer,
-                idCustomer
+            await ProductsModel.create({
+                categoryProduct,
+                descriptionProduct,
+                imageProduct: base64_encoded(imageProduct),
+                priceProduct,
+                availabilityProduct,
+                registrationDateProduct,
+                idStore,
+                itSold: false,
             });
 
             return res.json();
         } catch (error) {
             // @ts-ignore
-            return res.status(500).json({message: "Não foi possível registrar o cartão do usuário."})
+            return res.status(500).json({message: "Não foi possível registrar o produto da loja."})
         }
 
     }
 
-    static async getCustomer (req, res) {
+    /*static async getCustomer (req, res) {
         const {id} = req.params;
         try {
             const result = await CustomersModel.findById(id);
@@ -91,9 +95,9 @@ class CustomersController {
             // @ts-ignore
             return res.status(404).json({message: "Dados não encontrados."})
         }
-    }
+    }*/
 
-    static async getCardCustomers (req, res) {
+    /*static async getCardCustomers (req, res) {
         const {id} = req.params;
         try {
             const result = await CardCustomersModel.find({idCustomer: id});
@@ -103,9 +107,9 @@ class CustomersController {
             // @ts-ignore
             return res.status(404).json({message: "Dados não encontrados."});
         }
-    }
+    }*/
 
-    static async getAddressCustomers (req, res) {
+    /*static async getAddressCustomers (req, res) {
         const {id} = req.params;
         try {
             const result = await AddressCustomersModel.find({idCustomer: id});
@@ -115,9 +119,9 @@ class CustomersController {
             // @ts-ignore
             return res.status(404).json({message: "Dados não encontrados."});
         }
-    }
+    }*/
 
-    static async loginCustomers (req, res) {
+    /*static async loginCustomers (req, res) {
         const {emailCustomer, passwordCustomer} = req.body;
 
         const encryptedPassword = crypto.createHmac('sha512', `${process.env.ENCRYPT_KEY}`).update(passwordCustomer).digest('base64');
@@ -132,7 +136,7 @@ class CustomersController {
         const token = generateToken({_id: user._id, email: user.emailCustomer});
 
         return res.json({userList, token});
-    }
+    }*/
 }
 
 export default CustomersController;

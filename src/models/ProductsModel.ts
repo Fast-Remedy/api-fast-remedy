@@ -29,6 +29,9 @@ const Schema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    itSold: {
+        type: Boolean,
+    }
 });
 
 const ProductsModel = mongoose.model('Products', Schema);

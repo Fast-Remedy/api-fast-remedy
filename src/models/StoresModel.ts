@@ -1,37 +1,43 @@
 import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
-    idStore: {
+    cnpjStore: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    emailStore: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    passwordStore: {
+        type: String,
+        required: true,
+        select: false,
+    },
+    companyNameStore: {
         type: String,
         required: true,
     },
-    stateStore: {
-        type: String,
-        required: true,
-        maxlength: 2
-    },
-    cityStore: {
+    tradingNameStore: {
         type: String,
         required: true,
     },
-    neighborhoodStore: {
+    phoneStore: {
         type: String,
         required: true,
     },
-    complementStore: {
-        type: String,
+    deliveryFeeStore: {
+        type: Number,
         required: true,
     },
-    streetNumberStore: {
-        type: String,
+    deliveryEstimatedTimeStore: {
+        type: Date,
         required: true,
     },
-    streetNameStore: {
-        type: String,
-        required: true,
-    },
-    postalCodeStore: {
-        type: String,
+    registrationDateStore: {
+        type: Date,
         required: true,
     },
 });
