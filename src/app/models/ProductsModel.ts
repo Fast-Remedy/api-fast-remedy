@@ -10,7 +10,7 @@ const Schema = new mongoose.Schema({
         required: true,
     },
     availabilityProduct: {
-        type: Number,
+        type: Boolean,
         required: true,
     },
     priceProduct: {
@@ -28,9 +28,6 @@ const Schema = new mongoose.Schema({
     categoryProduct: {
         type: String,
         required: true,
-    },
-    itSold: {
-        type: Boolean,
     }
 });
 

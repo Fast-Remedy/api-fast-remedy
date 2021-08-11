@@ -1,4 +1,4 @@
-import CustomersModel from '../../models/CustomersModel';
+import CustomersModel from '../models/CustomersModel';
 
 export async function uniqueEmailCustomer(req, res, next){
     const { emailCustomer } = req.body;

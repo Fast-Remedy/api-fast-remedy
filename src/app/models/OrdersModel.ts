@@ -11,7 +11,7 @@ const Schema = new mongoose.Schema({
     },
     idDeliveryMan: {
         type: String,
-        required: true,
+        //required: true,
     },
     idProduct: {
         type: String,

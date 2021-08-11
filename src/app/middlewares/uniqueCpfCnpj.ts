@@ -1,4 +1,4 @@
-import CustomersModel from '../../models/CustomersModel';
+import CustomersModel from '../models/CustomersModel';
 
 export async function uniqueCpfCustomer(req, res, next){
     const { cpfCustomer } = req.body;
