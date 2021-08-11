@@ -28,7 +28,7 @@ const Schema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-    },
+    }
 });
 
 const CustomersModel = mongoose.model('Customers', Schema);
