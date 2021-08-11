@@ -11,3 +11,15 @@ export async function uniqueCpfCustomer(req, res, next){
 
     next();
 }
+
+export async function uniqueCnpjStore(req, res, next){
+    const { cnpjStore } = req.body;
+
+    const hasEmail = await CustomersModel.findOne({cnpjStore});
+
+    if (hasEmail){
+        return res.status(412).json({error: "Esse cnpj já está cadastrado."});
+    }
+
+    next();
+}

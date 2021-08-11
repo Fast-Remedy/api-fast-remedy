@@ -3,6 +3,7 @@ import CardCustomersModel from '../models/CardCustomersModel';
 import CustomersModel from '../models/CustomersModel';
 import crypto from 'crypto';
 import validate from '../utils/validate';
+import generateToken from "../utils/generateToken";
 
 class CustomersController {
     static async createCustomers (req, res) {
@@ -83,15 +84,7 @@ class CustomersController {
     static async getCustomer (req, res) {
         const {id} = req.params;
         try {
-            const result = await CustomersModel.findById(id)
-                .select(
-                    ['_id',
-                    'registrationDateCustomer',
-                    'phoneCustomer',
-                    'nameCustomer',
-                    'emailCustomer',
-                    'cpfCustomer']
-                );
+            const result = await CustomersModel.findById(id);
             // @ts-ignore
             return res.json(result);
         } catch (error){
@@ -122,6 +115,23 @@ class CustomersController {
             // @ts-ignore
             return res.status(404).json({message: "Dados não encontrados."});
         }
+    }
+
+    static async loginCustomers (req, res) {
+        const {emailCustomer, passwordCustomer} = req.body;
+
+        const encryptedPassword = crypto.createHmac('sha512', `${process.env.ENCRYPT_KEY}`).update(passwordCustomer).digest('base64');
+        const user = await CustomersModel.findOne({emailCustomer}).select('+passwordCustomer');
+        const password = await CustomersModel.findOne({passwordCustomer: encryptedPassword});
+        const userList = await CustomersModel.findOne({emailCustomer});
+
+        if(!user) return res.status(400).json({message: "Usuário não encontrado"});
+        if(!password) return res.status(400).json({message: "Senha invalida"});
+
+        // @ts-ignore
+        const token = generateToken({_id: user._id, email: user.emailCustomer});
+
+        return res.json({userList, token});
     }
 }
 
