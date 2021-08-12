@@ -12,6 +12,10 @@ import OrdersController from "../app/controllers/OrdersController";
 const routes = new Router();
 const uploads = multer(multerConfig);
 
+routes.get('/', (req, res) => {
+    return res.json({message: 'success'});
+});
+
 //Customer
 routes.post('/api/register/customers', uniqueEmailCustomer, uniqueCpfCustomer, CustomersController.createCustomers);
 routes.post('/api/register/address/customers', existIdCustomer, CustomersController.createAddressCustomer);
