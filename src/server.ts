@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import './database/connect';
+import './config/database/connect';
 import routes from './routes';
 import path from 'path';
 const app = express();
-const port = 3333;
+const port = 3335;
 
 app.use(express.json());
 app.use('/file', express.static(path.resolve(__dirname, '..', 'temp', 'uploads')))
