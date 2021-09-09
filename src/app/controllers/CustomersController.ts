@@ -27,6 +27,7 @@ class CustomersController {
             return res.json();
         } catch (error){
             // @ts-ignore
+            console.log(error.message)
             return res.status(500).json({message: "Não foi possível registrar o usuário."})
         }
     }

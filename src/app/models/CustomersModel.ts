@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
     registrationDateCustomer: {
-        type: Date,
+        type: String,
         required: true,
     },
     phoneCustomer: {

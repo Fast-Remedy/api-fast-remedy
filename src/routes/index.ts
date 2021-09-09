@@ -23,7 +23,7 @@ routes.post('/api/register/card/customers', existIdCustomer, CustomersController
 routes.get('/api/customers/:id', CustomersController.getCustomer);
 routes.get('/api/card/customers/:id',  CustomersController.getCardCustomers);
 routes.get('/api/address/customers/:id',  CustomersController.getAddressCustomers);
-routes.post('/api/customers/login', CustomersController.loginCustomers);
+routes.post('/api/login/customers', CustomersController.loginCustomers);
 
 //Stores
 routes.post('/api/register/stores', uniqueEmailStore, uniqueCnpjStore, StoreController.createStores);
@@ -33,7 +33,7 @@ routes.get('/api/stores/:id', auth, StoreController.getOneStores);
 routes.get('/api/stores/', auth, StoreController.getAllStores);
 routes.get('/api/products/:id',  auth, StoreController.getOneProducts);
 routes.get('/api/products/stores/:id',  existIdStore, auth, StoreController.getAllProductStore);
-routes.post('/api/stores/login', StoreController.loginStores);
+routes.post('/api/login/stores', StoreController.loginStores);
 
 //Orders
 routes.post('/api/orders', existIdStore, existIdCustomer, existIdProduct, OrdersController.createOrder);
