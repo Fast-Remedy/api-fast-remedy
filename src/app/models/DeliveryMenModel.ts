@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
     registrationDateDeliveryMan: {
-        type: Date,
+        type: String,
         required: true,
     },
     availabilityDeliveryMan: {

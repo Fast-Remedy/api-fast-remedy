@@ -6,7 +6,7 @@ const Schema = new mongoose.Schema({
         required: true,
     },
     registrationDateProduct: {
-        type: Date,
+        type: String,
         required: true,
     },
     availabilityProduct: {

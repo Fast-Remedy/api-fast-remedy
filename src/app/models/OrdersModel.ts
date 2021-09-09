@@ -18,7 +18,7 @@ const Schema = new mongoose.Schema({
         required: true,
     },
     dateOrder: {
-        type: Date,
+        type: String,
         required: true,
     },
     statusOrder: {

@@ -37,7 +37,7 @@ const Schema = new mongoose.Schema({
         required: true,
     },
     registrationDateStore: {
-        type: Date,
+        type: String,
         required: true,
     },
 });
