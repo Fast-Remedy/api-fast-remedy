@@ -8,7 +8,7 @@ const Schema = new mongoose.Schema({
     phoneCustomer: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     },
     nameCustomer: {
         type: String,
