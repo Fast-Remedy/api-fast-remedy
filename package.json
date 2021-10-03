@@ -2,6 +2,7 @@
 	"name": "api-fast-remedy",
 	"version": "1.0.0",
 	"main": "server.ts",
+	"type": "module",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/rafaelcsilvadev/api-fast-remedy.git"
