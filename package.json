@@ -2,7 +2,6 @@
 	"name": "api-fast-remedy",
 	"version": "1.0.0",
 	"main": "server.ts",
-	"type": "module",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/rafaelcsilvadev/api-fast-remedy.git"
@@ -16,7 +15,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon src/server.ts",
-		"start": "node src/server.ts"
+		"start": "nodemon src/server.ts"
 	},
 	"keywords": [],
 	"dependencies": {

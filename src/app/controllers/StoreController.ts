@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import generateToken from '../utils/generateToken';
 import base64_encoded from "../utils/base64Encoded";
 
-class CustomersController {
+class StoreController {
     static async createStores (req, res) {
         // @ts-ignore
         let { cnpjStore, emailStore, passwordStore, companyNameStore, tradingNameStore, phoneStore, deliveryFeeStore, deliveryEstimatedTimeStore, registrationDateStore } = req.body;
@@ -151,4 +151,4 @@ class CustomersController {
     }
 }
 
-export default CustomersController;
+export default StoreController;
