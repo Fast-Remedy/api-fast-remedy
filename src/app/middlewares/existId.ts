@@ -9,7 +9,7 @@ export async function existIdCustomer(req, res, next) {
 		await CustomersModel.findOne({ _id });
 		next();
 	} catch (err) {
-		return res.status(412).json({ error: 'Não existe usuário.' });
+		return res.status(404).json({ error: 'Não existe usuário.' });
 	}
 }
 
@@ -21,7 +21,7 @@ export async function existIdStore(req, res, next) {
 		await CustomersModel.findOne({ _id });
 		next();
 	} catch (err) {
-		return res.status(412).json({ error: 'Não existe usuário.' });
+		return res.status(404).json({ error: 'Não existe usuário.' });
 	}
 }
 
@@ -33,6 +33,6 @@ export async function existIdProduct(req, res, next) {
 		await ProductsModel.findOne({ _id });
 		next();
 	} catch (err) {
-		return res.status(412).json({ error: 'Não existe usuário.' });
+		return res.status(404).json({ error: 'Não existe usuário.' });
 	}
 }
