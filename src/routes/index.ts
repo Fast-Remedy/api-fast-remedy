@@ -4,13 +4,10 @@ import { uniqueEmailCustomer, uniqueEmailStore } from '../app/middlewares/unique
 import { uniqueCnpjStore, uniqueCpfCustomer } from '../app/middlewares/uniqueCpfCnpj';
 import { existIdCustomer, existIdProduct, existIdStore } from '../app/middlewares/existId';
 import StoreController from '../app/controllers/StoreController';
-import multer from 'multer';
-import multerConfig from '../config/multerConfig';
 import { auth } from '../app/middlewares/auth';
 import OrdersController from '../app/controllers/OrdersController';
 // import {auth} from "../middlewares/auth";
 const routes = new Router();
-const uploads = multer(multerConfig);
 
 routes.get('/', (req, res) => {
 	return res.json({ message: 'API running' });
@@ -46,12 +43,7 @@ routes.post(
 	StoreController.createStores
 );
 routes.post('/api/register/address/stores', existIdStore, StoreController.createAddressStores);
-routes.post(
-	'/api/register/product/stores',
-	uploads.single('imageProduct'),
-	existIdStore,
-	StoreController.createProductStore
-);
+routes.post('/api/register/product/stores', existIdStore, StoreController.createProductStore);
 routes.get('/api/stores/:id', auth, StoreController.getOneStores);
 routes.get('/api/stores/', auth, StoreController.getAllStores);
 routes.get('/api/products/:id', auth, StoreController.getOneProducts);

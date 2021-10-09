@@ -12,6 +12,12 @@ class StoreController {
 		// @ts-ignore
 		let {
 			cnpjStore,
+			imageStore,
+			deliveryMode,
+			bankNumber,
+			agencyNumber,
+			accountNumber,
+			verifyingDigit,
 			emailStore,
 			passwordStore,
 			companyNameStore,
@@ -40,8 +46,13 @@ class StoreController {
 				deliveryFeeStore,
 				deliveryEstimatedTimeStore,
 				registrationDateStore,
+				imageStore,
+				deliveryMode,
+				bankNumber,
+				agencyNumber,
+				accountNumber,
+				verifyingDigit,
 			});
-
 			return res.json();
 		} catch (error) {
 			// @ts-ignore
@@ -91,8 +102,8 @@ class StoreController {
 			availabilityProduct,
 			registrationDateProduct,
 			idStore,
+			imageProduct,
 		} = req.body;
-		let { filename: imageProduct } = req.file;
 
 		try {
 			await ProductsModel.create({

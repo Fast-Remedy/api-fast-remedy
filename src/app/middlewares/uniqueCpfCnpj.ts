@@ -1,4 +1,5 @@
 import CustomersModel from '../models/CustomersModel';
+import StoresModel from '../models/StoresModel';
 
 export async function uniqueCpfCustomer(req, res, next) {
 	const { cpfCustomer } = req.body;
@@ -15,7 +16,7 @@ export async function uniqueCpfCustomer(req, res, next) {
 export async function uniqueCnpjStore(req, res, next) {
 	const { cnpjStore } = req.body;
 
-	const hasEmail = await CustomersModel.findOne({ cnpjStore });
+	const hasEmail = await StoresModel.findOne({ cnpjStore });
 
 	if (hasEmail) {
 		return res.status(409).json({ error: 'Esse cnpj já está cadastrado.' });

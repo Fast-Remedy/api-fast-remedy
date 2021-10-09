@@ -40,6 +40,30 @@ const Schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	imageStore: {
+		type: String,
+		required: true,
+	},
+	deliveryMode: {
+		type: String,
+		required: true,
+	},
+	bankNumber: {
+		type: String,
+		required: true,
+	},
+	agencyNumber: {
+		type: String,
+		required: true,
+	},
+	accountNumber: {
+		type: String,
+		required: true,
+	},
+	verifyingDigit: {
+		type: String,
+		required: true,
+	},
 });
 
 const StoresModel = mongoose.model('Stores', Schema);
