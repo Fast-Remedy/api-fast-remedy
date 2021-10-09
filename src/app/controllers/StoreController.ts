@@ -177,17 +177,17 @@ class StoreController {
 			.createHmac('sha512', `${process.env.ENCRYPT_KEY}`)
 			.update(passwordStore)
 			.digest('base64');
-		const user = await StoresModel.findOne({ emailStore }).select('+passwordCustomer');
+		const store = await StoresModel.findOne({ emailStore }).select('+passwordCustomer');
 		const password = await StoresModel.findOne({ passwordStore: encryptedPassword });
-		const userList = await StoresModel.findOne({ emailStore });
+		const storeList = await StoresModel.findOne({ emailStore });
 
-		if (!user) return res.status(400).json({ message: 'Usuário não encontrado' });
+		if (!store) return res.status(400).json({ message: 'Usuário não encontrado' });
 		if (!password) return res.status(400).json({ message: 'Senha invalida' });
 
 		// @ts-ignore
-		const token = generateToken({ _id: user._id, email: user.emailCustomer });
+		const token = generateToken({ _id: store._id, email: store.emailStore });
 
-		return res.json({ userList, token });
+		return res.json({ storeList, token });
 	}
 }
 
