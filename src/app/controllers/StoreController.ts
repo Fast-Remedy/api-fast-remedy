@@ -137,16 +137,18 @@ class StoreController {
 
 	static async getAllStores(req, res) {
 		try {
-			const { _id, tradingNameStore, imageStore, deliveryFeeStore, deliveryEstimatedTimeStore } =
-				await StoresModel.find();
+			const stores = await StoresModel.find();
 
-			const result = {
-				_id,
-				tradingNameStore,
-				imageStore,
-				deliveryFeeStore,
-				deliveryEstimatedTimeStore,
-			};
+			const result = stores.map(store => {
+				const filter = {
+					_id: store._id,
+					tradingNameStore: store.tradingNameStore,
+					imageStore: store.imageStore,
+					deliveryFeeStore: store.deliveryFeeStore,
+					deliveryEstimatedTimeStore: store.deliveryEstimatedTimeStore,
+				};
+				return filter;
+			});
 			// @ts-ignore
 			return res.json(result);
 		} catch (error) {
