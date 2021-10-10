@@ -33,7 +33,7 @@ const Schema = new mongoose.Schema({
 		required: true,
 	},
 	deliveryEstimatedTimeStore: {
-		type: Date,
+		type: Number,
 		required: true,
 	},
 	registrationDateStore: {
