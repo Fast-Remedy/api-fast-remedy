@@ -137,10 +137,11 @@ class StoreController {
 
 	static async getAllStores(req, res) {
 		try {
-			const { tradingNameStore, imageStore, deliveryFeeStore, deliveryEstimatedTimeStore } =
+			const { _id, tradingNameStore, imageStore, deliveryFeeStore, deliveryEstimatedTimeStore } =
 				await StoresModel.find();
 
 			const result = {
+				_id,
 				tradingNameStore,
 				imageStore,
 				deliveryFeeStore,
