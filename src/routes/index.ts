@@ -23,16 +23,18 @@ routes.post(
 routes.post(
 	'/api/register/address/customers',
 	existIdCustomer,
+	auth,
 	CustomersController.createAddressCustomer
 );
 routes.post(
 	'/api/register/card/customers',
 	existIdCustomer,
+	auth,
 	CustomersController.createCardCustomers
 );
-routes.get('/api/customers/:id', CustomersController.getCustomer);
-routes.get('/api/card/customers/:id', CustomersController.getCardCustomers);
-routes.get('/api/address/customers/:id', CustomersController.getAddressCustomers);
+routes.get('/api/customers/:id', auth, CustomersController.getCustomer);
+routes.get('/api/card/customers/:id', auth, CustomersController.getCardCustomers);
+routes.get('/api/address/customers/:id', auth, CustomersController.getAddressCustomers);
 routes.post('/api/login/customers', CustomersController.loginCustomers);
 
 //Stores
@@ -42,12 +44,17 @@ routes.post(
 	uniqueCnpjStore,
 	StoreController.createStores
 );
-routes.post('/api/register/address/stores', existIdStore, StoreController.createAddressStores);
-routes.post('/api/register/product/stores', existIdStore, StoreController.createProductStore);
+routes.post(
+	'/api/register/address/stores',
+	existIdStore,
+	auth,
+	StoreController.createAddressStores
+);
+routes.post('/api/register/product/stores', existIdStore, auth, StoreController.createProductStore);
 routes.get('/api/stores/:id', auth, StoreController.getOneStores);
-routes.get('/api/stores/', auth, StoreController.getAllStores);
-routes.get('/api/products/:id', auth, StoreController.getOneProducts);
-routes.get('/api/products/stores/:id', existIdStore, auth, StoreController.getAllProductStore);
+routes.get('/api/stores/', StoreController.getAllStores);
+routes.get('/api/products/:id', StoreController.getOneProducts);
+routes.get('/api/products/stores/:id', existIdStore, StoreController.getAllProductStore);
 routes.post('/api/login/stores', StoreController.loginStores);
 
 //Orders
@@ -56,6 +63,7 @@ routes.post(
 	existIdStore,
 	existIdCustomer,
 	existIdProduct,
+	auth,
 	OrdersController.createOrder
 );
 routes.get('/api/get/orders/:id', auth, OrdersController.getOrder);
