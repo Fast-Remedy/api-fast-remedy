@@ -137,7 +137,15 @@ class StoreController {
 
 	static async getAllStores(req, res) {
 		try {
-			const result = await StoresModel.find();
+			const { tradingNameStore, imageStore, deliveryFeeStore, deliveryEstimatedTimeStore } =
+				await StoresModel.find();
+
+			const result = {
+				tradingNameStore,
+				imageStore,
+				deliveryFeeStore,
+				deliveryEstimatedTimeStore,
+			};
 			// @ts-ignore
 			return res.json(result);
 		} catch (error) {
