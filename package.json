@@ -14,8 +14,8 @@
 	"homepage": "https://github.com/rafaelcsilvadev/api-fast-remedy#readme",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "nodemon src/server.ts",
-		"start": "nodemon src/server.ts"
+		"dev": "nodemon --max_old_space_size=2560 src/server.ts",
+		"start": "nodemon --max_old_space_size=2560 src/server.ts"
 	},
 	"keywords": [],
 	"dependencies": {
