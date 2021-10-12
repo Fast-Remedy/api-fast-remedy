@@ -62,7 +62,7 @@ class StoreController {
 	}
 
 	static async updateStores(req, res) {
-		const {id} = req.params;
+		const { id } = req.params;
 		// @ts-ignore
 		let {
 			cnpjStore,
@@ -90,23 +90,26 @@ class StoreController {
 		await validate(req, res);
 
 		try {
-			await StoresModel.findOneAndUpdate( {_id: id}, {
-				cnpjStore,
-				emailStore,
-				passwordStore: encryptedPassword,
-				companyNameStore,
-				tradingNameStore,
-				phoneStore,
-				deliveryFeeStore,
-				deliveryEstimatedTimeStore,
-				registrationDateStore,
-				imageStore,
-				deliveryMode,
-				bankNumber,
-				agencyNumber,
-				accountNumber,
-				verifyingDigit,
-			});
+			await StoresModel.findOneAndUpdate(
+				{ _id: id },
+				{
+					cnpjStore,
+					emailStore,
+					passwordStore: encryptedPassword,
+					companyNameStore,
+					tradingNameStore,
+					phoneStore,
+					deliveryFeeStore,
+					deliveryEstimatedTimeStore,
+					registrationDateStore,
+					imageStore,
+					deliveryMode,
+					bankNumber,
+					agencyNumber,
+					accountNumber,
+					verifyingDigit,
+				}
+			);
 			return res.json();
 		} catch (error) {
 			// @ts-ignore
@@ -180,7 +183,7 @@ class StoreController {
 	}
 
 	static async updateProductStore(req, res) {
-		const {id} = req.params
+		const { id } = req.params;
 		// @ts-ignore
 		let {
 			categoryProduct,
@@ -193,15 +196,18 @@ class StoreController {
 		} = req.body;
 
 		try {
-			await ProductsModel.findOneAndUpdate({_id: id}, {
-				categoryProduct,
-				descriptionProduct,
-				imageProduct,
-				priceProduct,
-				availabilityProduct,
-				registrationDateProduct,
-				compositionProduct,
-			});
+			await ProductsModel.findOneAndUpdate(
+				{ _id: id },
+				{
+					categoryProduct,
+					descriptionProduct,
+					imageProduct,
+					priceProduct,
+					availabilityProduct,
+					registrationDateProduct,
+					compositionProduct,
+				}
+			);
 
 			return res.json();
 		} catch (error) {
@@ -211,10 +217,10 @@ class StoreController {
 	}
 
 	static async deleteProductStore(req, res) {
-		const {id} = req.params;
+		const { id } = req.params;
 
 		try {
-			await ProductsModel.findByIdAndDelete({_id: id});
+			await ProductsModel.findByIdAndDelete({ _id: id });
 			return res.json();
 		} catch (error) {
 			// @ts-ignore
@@ -226,6 +232,25 @@ class StoreController {
 		const { id } = req.params;
 		try {
 			const result = await StoresModel.findById(id);
+			// @ts-ignore
+			return res.json(result);
+		} catch (error) {
+			// @ts-ignore
+			return res.status(404).json({ message: 'Dados não encontrados.' });
+		}
+	}
+
+	static async getDeliveryStore(req, res) {
+		const { id } = req.params;
+		try {
+			const store = await StoresModel.findById(id);
+
+			const result = {
+				_id: store._id,
+				tradingNameStore: store.tradingNameStore,
+				deliveryFeeStore: store.deliveryFeeStore,
+				deliveryEstimatedTimeStore: store.deliveryEstimatedTimeStore,
+			};
 			// @ts-ignore
 			return res.json(result);
 		} catch (error) {
@@ -248,6 +273,17 @@ class StoreController {
 				};
 				return filter;
 			});
+			// @ts-ignore
+			return res.json(result);
+		} catch (error) {
+			// @ts-ignore
+			return res.status(404).json({ message: 'Dados não encontrados.' });
+		}
+	}
+
+	static async getAllProducts(req, res) {
+		try {
+			const result = await ProductsModel.find();
 			// @ts-ignore
 			return res.json(result);
 		} catch (error) {
