@@ -121,7 +121,6 @@ class StoreController {
 	static async createAddressStores(req, res) {
 		// @ts-ignore
 		let {
-			postalCodeStore,
 			streetNameStore,
 			streetNumberStore,
 			complementStore,
@@ -133,7 +132,6 @@ class StoreController {
 
 		try {
 			await AddressStoresModel.create({
-				postalCodeStore,
 				streetNameStore,
 				streetNumberStore,
 				complementStore,

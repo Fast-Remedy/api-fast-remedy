@@ -25,10 +25,6 @@ const Schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	postalCodeStore: {
-		type: String,
-		required: true,
-	},
 });
 
 const AddressStoresModel = mongoose.model('AddressStores', Schema);

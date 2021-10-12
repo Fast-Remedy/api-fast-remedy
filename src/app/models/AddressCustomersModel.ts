@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
-	postalCodeCustomer: {
-		type: String,
-		required: true,
-	},
 	streetNameCustomer: {
 		type: String,
 		required: true,

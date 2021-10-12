@@ -45,7 +45,6 @@ class CustomersController {
 	static async createAddressCustomer(req, res) {
 		// @ts-ignore
 		let {
-			postalCodeCustomer,
 			streetNameCustomer,
 			streetNumberCustomer,
 			complementCustomer,
@@ -58,7 +57,6 @@ class CustomersController {
 
 		try {
 			await AddressCustomersModel.create({
-				postalCodeCustomer,
 				streetNameCustomer,
 				streetNumberCustomer,
 				complementCustomer,
