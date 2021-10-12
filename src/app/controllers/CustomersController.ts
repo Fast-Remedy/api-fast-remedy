@@ -74,6 +74,45 @@ class CustomersController {
 		}
 	}
 
+	static async updateAddressCustomer(req, res) {
+		const { id } = req.params;
+		// @ts-ignore
+		let {
+			_id,
+			streetNameCustomer,
+			streetNumberCustomer,
+			complementCustomer,
+			neighborhoodCustomer,
+			cityCustomer,
+			stateCustomer,
+			mainAddressCustomer,
+			idCustomer,
+		} = req.body;
+
+		await validate(req, res);
+
+		try {
+			await AddressCustomersModel.findOneAndUpdate(
+				{ _id: id },
+				{
+					streetNameCustomer,
+					streetNumberCustomer,
+					complementCustomer,
+					neighborhoodCustomer,
+					cityCustomer,
+					stateCustomer,
+					mainAddressCustomer,
+					idCustomer,
+				}
+			);
+			return res.json();
+		} catch (error) {
+			// @ts-ignore
+			console.log(error.message);
+			return res.status(500).json({ message: 'Não foi possível alterar o endereço.' });
+		}
+	}
+
 	static async createCardCustomers(req, res) {
 		// @ts-ignore
 		let {

@@ -26,6 +26,12 @@ routes.post(
 	auth,
 	CustomersController.createAddressCustomer
 );
+routes.put(
+	'/api/register/address/customers/:id',
+	existIdCustomer,
+	auth,
+	CustomersController.updateAddressCustomer
+);
 routes.post(
 	'/api/register/card/customers',
 	existIdCustomer,
