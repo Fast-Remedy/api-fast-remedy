@@ -44,6 +44,15 @@ routes.post(
 	uniqueCnpjStore,
 	StoreController.createStores
 );
+
+routes.put(
+	'/api/update/stores/:id',
+	uniqueEmailStore,
+	uniqueCnpjStore,
+	auth,
+	StoreController.updateStores
+);
+
 routes.post(
 	'/api/register/address/stores',
 	existIdStore,
@@ -51,6 +60,10 @@ routes.post(
 	StoreController.createAddressStores
 );
 routes.post('/api/register/product/stores', existIdStore, auth, StoreController.createProductStore);
+
+routes.put('/api/update/product/stores/:id', auth, StoreController.updateProductStore);
+routes.delete('/api/delete/product/stores/:id', auth, StoreController.deleteProductStore);
+
 routes.get('/api/stores/:id', auth, StoreController.getOneStores);
 routes.get('/api/stores/', StoreController.getAllStores);
 routes.get('/api/products/:id', StoreController.getOneProducts);

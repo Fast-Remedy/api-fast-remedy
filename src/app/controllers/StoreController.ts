@@ -61,6 +61,60 @@ class StoreController {
 		}
 	}
 
+	static async updateStores(req, res) {
+		const {id} = req.params;
+		// @ts-ignore
+		let {
+			cnpjStore,
+			imageStore,
+			deliveryMode,
+			bankNumber,
+			agencyNumber,
+			accountNumber,
+			verifyingDigit,
+			emailStore,
+			passwordStore,
+			companyNameStore,
+			tradingNameStore,
+			phoneStore,
+			deliveryFeeStore,
+			deliveryEstimatedTimeStore,
+			registrationDateStore,
+		} = req.body;
+
+		const encryptedPassword = crypto
+			.createHmac('sha512', `${process.env.ENCRYPT_KEY}`)
+			.update(passwordStore)
+			.digest('base64');
+
+		await validate(req, res);
+
+		try {
+			await StoresModel.findOneAndUpdate( {_id: id}, {
+				cnpjStore,
+				emailStore,
+				passwordStore: encryptedPassword,
+				companyNameStore,
+				tradingNameStore,
+				phoneStore,
+				deliveryFeeStore,
+				deliveryEstimatedTimeStore,
+				registrationDateStore,
+				imageStore,
+				deliveryMode,
+				bankNumber,
+				agencyNumber,
+				accountNumber,
+				verifyingDigit,
+			});
+			return res.json();
+		} catch (error) {
+			// @ts-ignore
+			console.log(error.message);
+			return res.status(500).json({ message: 'Não foi possível registrar a loja.' });
+		}
+	}
+
 	static async createAddressStores(req, res) {
 		// @ts-ignore
 		let {
@@ -103,6 +157,7 @@ class StoreController {
 			registrationDateProduct,
 			idStore,
 			imageProduct,
+			compositionProduct,
 		} = req.body;
 
 		try {
@@ -114,8 +169,52 @@ class StoreController {
 				availabilityProduct,
 				registrationDateProduct,
 				idStore,
+				compositionProduct,
 			});
 
+			return res.json();
+		} catch (error) {
+			// @ts-ignore
+			return res.status(500).json({ message: error.message });
+		}
+	}
+
+	static async updateProductStore(req, res) {
+		const {id} = req.params
+		// @ts-ignore
+		let {
+			categoryProduct,
+			descriptionProduct,
+			priceProduct,
+			availabilityProduct,
+			registrationDateProduct,
+			imageProduct,
+			compositionProduct,
+		} = req.body;
+
+		try {
+			await ProductsModel.findOneAndUpdate({_id: id}, {
+				categoryProduct,
+				descriptionProduct,
+				imageProduct,
+				priceProduct,
+				availabilityProduct,
+				registrationDateProduct,
+				compositionProduct,
+			});
+
+			return res.json();
+		} catch (error) {
+			// @ts-ignore
+			return res.status(500).json({ message: error.message });
+		}
+	}
+
+	static async deleteProductStore(req, res) {
+		const {id} = req.params;
+
+		try {
+			await ProductsModel.findByIdAndDelete({_id: id});
 			return res.json();
 		} catch (error) {
 			// @ts-ignore

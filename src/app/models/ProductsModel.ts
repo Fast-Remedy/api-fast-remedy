@@ -9,6 +9,10 @@ const Schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	compositionProduct: {
+		type: String,
+		required: true,
+	},
 	availabilityProduct: {
 		type: Boolean,
 		required: true,
