@@ -65,11 +65,11 @@ routes.put('/api/update/product/stores/:id', auth, StoreController.updateProduct
 routes.delete('/api/delete/product/stores/:id', auth, StoreController.deleteProductStore);
 
 routes.get('/api/stores/:id', auth, StoreController.getOneStores);
+routes.get('/api/stores/:id/delivery', existIdStore, StoreController.getDeliveryStore);
 routes.get('/api/stores/', StoreController.getAllStores);
 routes.get('/api/products', StoreController.getAllProducts);
 routes.get('/api/products/:id', StoreController.getOneProducts);
 routes.get('/api/products/stores/:id', existIdStore, StoreController.getAllProductStore);
-routes.get('/api/products/stores/:id/delivery', existIdStore, StoreController.getDeliveryStore);
 routes.post('/api/login/stores', StoreController.loginStores);
 
 //Orders
