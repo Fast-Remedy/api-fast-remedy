@@ -11,7 +11,7 @@ const Schema = new mongoose.Schema({
 	},
 	compositionProduct: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	availabilityProduct: {
 		type: Boolean,
