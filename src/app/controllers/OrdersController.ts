@@ -6,8 +6,8 @@ class OrdersController {
 		let {
 			idCustomer,
 			idStore,
-			idDeliveryMan,
-			idProduct,
+			//idDeliveryMan,
+			orderProducts,
 			dateOrder,
 			statusOrder,
 			totalOrder,
@@ -20,8 +20,8 @@ class OrdersController {
 			await OrdersModel.create({
 				idCustomer,
 				idStore,
-				idDeliveryMan,
-				idProduct,
+				// idDeliveryMan,
+				orderProducts,
 				dateOrder,
 				statusOrder,
 				totalOrder,
