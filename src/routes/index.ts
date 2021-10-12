@@ -32,6 +32,12 @@ routes.put(
 	auth,
 	CustomersController.updateAddressCustomer
 );
+routes.delete(
+	'/api/delete/address/customers/:id',
+	existIdCustomer,
+	auth,
+	CustomersController.deleteAddressCustomer
+);
 routes.post(
 	'/api/register/card/customers',
 	existIdCustomer,

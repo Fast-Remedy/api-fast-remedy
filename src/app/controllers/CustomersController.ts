@@ -113,6 +113,18 @@ class CustomersController {
 		}
 	}
 
+	static async deleteAddressCustomer(req, res) {
+		const { id } = req.params;
+
+		try {
+			await AddressCustomersModel.findByIdAndDelete({ _id: id });
+			return res.json();
+		} catch (error) {
+			// @ts-ignore
+			return res.status(500).json({ message: error.message });
+		}
+	}
+
 	static async createCardCustomers(req, res) {
 		// @ts-ignore
 		let {
