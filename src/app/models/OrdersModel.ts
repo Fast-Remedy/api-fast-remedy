@@ -21,6 +21,14 @@ const Schema = new mongoose.Schema({
 	// 	type: String,
 	// 	required: true,
 	// },
+	addressCostumer: {
+		type: Array,
+		required: true,
+	},
+	addressStore: {
+		type: Array,
+		required: true,
+	},
 	dateOrder: {
 		type: String,
 		required: true,

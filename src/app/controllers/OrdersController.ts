@@ -14,6 +14,8 @@ class OrdersController {
 			subTotalOrder,
 			deliveryEstimatedOrder,
 			deliveryFeeOrder,
+			addressCostumer,
+			addressStore,
 		} = req.body;
 
 		try {
@@ -28,6 +30,8 @@ class OrdersController {
 				subTotalOrder,
 				deliveryEstimatedOrder,
 				deliveryFeeOrder,
+				addressCostumer,
+				addressStore,
 			});
 
 			return res.json();
