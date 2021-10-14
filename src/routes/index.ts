@@ -13,13 +13,26 @@ routes.get('/', (req, res) => {
 	return res.json({ message: 'API running' });
 });
 
-//Customer
+// --- Customers
+
+// Customer
+routes.get('/api/customers/:id', auth, CustomersController.getCustomer);
+routes.post('/api/login/customers', CustomersController.loginCustomer);
 routes.post(
 	'/api/register/customers',
 	uniqueEmailCustomer,
 	uniqueCpfCustomer,
-	CustomersController.createCustomers
+	CustomersController.createCustomer
 );
+routes.put('/api/update/customers/:id', auth, CustomersController.updateCustomer);
+routes.patch(
+	'/api/update/customers/password/:id',
+	auth,
+	CustomersController.updatePasswordCustomer
+);
+
+// Address
+routes.get('/api/address/customers/:id', auth, CustomersController.getAddressCustomer);
 routes.post(
 	'/api/register/address/customers',
 	existIdCustomer,
@@ -27,7 +40,7 @@ routes.post(
 	CustomersController.createAddressCustomer
 );
 routes.put(
-	'/api/register/address/customers/:id',
+	'/api/update/address/customers/:id',
 	existIdCustomer,
 	auth,
 	CustomersController.updateAddressCustomer
@@ -38,58 +51,90 @@ routes.delete(
 	auth,
 	CustomersController.deleteAddressCustomer
 );
+
+// Card
+routes.get('/api/card/customers/:id', auth, CustomersController.getCardCustomer);
 routes.post(
 	'/api/register/card/customers',
 	existIdCustomer,
 	auth,
-	CustomersController.createCardCustomers
+	CustomersController.createCardCustomer
 );
-routes.get('/api/customers/:id', auth, CustomersController.getCustomer);
-routes.get('/api/card/customers/:id', auth, CustomersController.getCardCustomers);
-routes.get('/api/address/customers/:id', auth, CustomersController.getAddressCustomers);
-routes.post('/api/login/customers', CustomersController.loginCustomers);
+routes.put(
+	'/api/update/card/customers/:id',
+	existIdCustomer,
+	auth,
+	CustomersController.updateCardCustomer
+);
+routes.delete(
+	'/api/delete/card/customers/:id',
+	existIdCustomer,
+	auth,
+	CustomersController.deleteCardCustomer
+);
 
-//Stores
-routes.post(
-	'/api/register/stores',
-	uniqueEmailStore,
-	uniqueCnpjStore,
-	StoreController.createStores
-);
+/// ------
+
+// --- Stores
+
+// Store
+routes.get('/api/stores/', StoreController.getAllStores);
+routes.get('/api/stores/:id', auth, StoreController.getOneStore);
+routes.get('/api/stores/:id/delivery', existIdStore, auth, StoreController.getDeliveryStore);
+routes.post('/api/login/stores', StoreController.loginStore);
+routes.post('/api/register/stores', uniqueEmailStore, uniqueCnpjStore, StoreController.createStore);
 routes.put(
 	'/api/update/stores/:id',
 	uniqueEmailStore,
 	uniqueCnpjStore,
 	auth,
-	StoreController.updateStores
+	StoreController.updateStore
 );
-routes.post(
-	'/api/register/address/stores',
-	existIdStore,
+routes.patch(
+	'/api/update/stores/password/:id',
+	uniqueEmailStore,
+	uniqueCnpjStore,
 	auth,
-	StoreController.createAddressStores
+	StoreController.updatePasswordStore
 );
+
+// Products
+routes.get('/api/products', StoreController.getAllProducts);
+routes.get('/api/products/stores/:id', existIdStore, StoreController.getAllProductStore);
+routes.get('/api/products/:id', StoreController.getOneProduct);
 routes.post('/api/register/product/stores', existIdStore, auth, StoreController.createProductStore);
 routes.put('/api/update/product/stores/:id', auth, StoreController.updateProductStore);
 routes.delete('/api/delete/product/stores/:id', auth, StoreController.deleteProductStore);
-routes.get('/api/stores/:id', auth, StoreController.getOneStores);
-routes.get('/api/stores/:id/delivery', existIdStore, StoreController.getDeliveryStore);
-routes.get('/api/stores/', StoreController.getAllStores);
-routes.get('/api/products', StoreController.getAllProducts);
-routes.get('/api/products/:id', StoreController.getOneProducts);
-routes.get('/api/products/stores/:id', existIdStore, StoreController.getAllProductStore);
-routes.post('/api/login/stores', StoreController.loginStores);
 
-//Orders
+// Address
+routes.get('/api/address/stores/:id', auth, StoreController.getAddressStore);
+routes.post('/api/register/address/stores', existIdStore, auth, StoreController.createAddressStore);
+routes.put(
+	'/api/update/address/stores/:id',
+	existIdStore,
+	auth,
+	StoreController.updateAddressStore
+);
+routes.delete(
+	'/api/delete/address/stores/:id',
+	existIdStore,
+	auth,
+	StoreController.deleteAddressStore
+);
+
+/// ------
+
+// --- Orders
+routes.get('/api/orders/customer/:id', auth, OrdersController.getCustomerOrders);
+routes.get('/api/orders/store/:id', auth, OrdersController.getStoreOrders);
+routes.get('/api/orders/:id', auth, OrdersController.getOrder);
 routes.post(
-	'/api/orders',
+	'/api/create/orders',
 	existIdStore,
 	existIdCustomer,
-	existIdProduct,
 	auth,
 	OrdersController.createOrder
 );
-routes.get('/api/get/orders/:id', auth, OrdersController.getOrder);
 routes.patch('/api/change/orders/status/:id', auth, OrdersController.updateStatus);
 
 export default routes;

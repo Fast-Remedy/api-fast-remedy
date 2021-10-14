@@ -9,18 +9,18 @@ const Schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	// idDeliveryMan: {
-	// 	type: String,
-	// 	//required: true,
-	// },
+	idDeliveryMan: {
+		type: String,
+		required: false,
+	},
 	orderProducts: {
 		type: Array,
 		required: true,
 	},
-	// idProduct: {
-	// 	type: String,
-	// 	required: true,
-	// },
+	paymentOrder: {
+		type: Array,
+		required: true,
+	},
 	addressCostumer: {
 		type: Array,
 		required: true,
