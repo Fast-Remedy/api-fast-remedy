@@ -9,26 +9,18 @@ class OrdersController {
 			const orderResult = await OrdersModel.find({ idCustomer: id });
 			let storeResult = [];
 
-			orderResult.forEach(async order => {
+			for (const order of orderResult) {
 				const store = await StoresModel.findById(order.idStore);
 				storeResult.push(store);
-			});
+			}
 
 			const stores = storeResult.map(store => ({
-				_id: store._id,
 				tradingNameStore: store.tradingNameStore,
 				phoneStore: store.phoneStore,
 				imageStore: store.imageStore,
 			}));
 
-			let result = [];
-
-			for (let i = 0; i < orderResult.length; i++) {
-				result.push({
-					...orderResult[i],
-					...stores.find(store => store._id === orderResult[i].idStore),
-				});
-			}
+			let result = orderResult.map((item, i) => Object.assign({}, item._doc, stores[i]));
 
 			// @ts-ignore
 			return res.json(result);
@@ -44,25 +36,17 @@ class OrdersController {
 			const orderResult = await OrdersModel.find({ idStore: id });
 			let customerResult = [];
 
-			orderResult.forEach(async order => {
+			for (const order of orderResult) {
 				const customer = await CustomersModel.findById(order.idCustomer);
 				customerResult.push(customer);
-			});
+			}
 
 			const customers = customerResult.map(customer => ({
-				_id: customer._id,
 				nameCustomer: customer.nameCustomer,
 				phoneCustomer: customer.phoneCustomer,
 			}));
 
-			let result = [];
-
-			for (let i = 0; i < orderResult.length; i++) {
-				result.push({
-					...orderResult[i],
-					...customers.find(customer => customer._id === orderResult[i].idCustomer),
-				});
-			}
+			let result = orderResult.map((item, i) => Object.assign({}, item._doc, customers[i]));
 
 			// @ts-ignore
 			return res.json(result);
