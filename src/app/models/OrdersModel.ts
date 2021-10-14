@@ -27,7 +27,7 @@ const Schema = new mongoose.Schema({
 	},
 	addressStore: {
 		type: Array,
-		required: true,
+		required: false,
 	},
 	dateOrder: {
 		type: String,
