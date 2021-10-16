@@ -96,7 +96,7 @@ class OrdersController {
 			deliveryEstimatedOrder,
 			deliveryFeeOrder,
 			paymentOrder,
-			addressCostumer,
+			addressCustomer,
 			addressStore,
 		} = req.body;
 
@@ -113,7 +113,7 @@ class OrdersController {
 				deliveryEstimatedOrder,
 				deliveryFeeOrder,
 				paymentOrder,
-				addressCostumer,
+				addressCustomer,
 				addressStore,
 			});
 
