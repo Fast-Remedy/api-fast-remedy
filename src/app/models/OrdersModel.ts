@@ -21,7 +21,7 @@ const Schema = new mongoose.Schema({
 		type: Array,
 		required: true,
 	},
-	addressCostumer: {
+	addressCustomer: {
 		type: Array,
 		required: true,
 	},
