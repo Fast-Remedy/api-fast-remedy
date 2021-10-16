@@ -63,7 +63,7 @@ class OrdersController {
 			const customerResult = await CustomersModel.findById(orderResult.idCustomer);
 			const storeResult = await StoresModel.findById(orderResult.idStore);
 			const result = {
-				...orderResult,
+				...orderResult._doc,
 				customer: {
 					nameCustomer: customerResult.nameCustomer,
 					phoneCustomer: customerResult.phoneCustomer,
