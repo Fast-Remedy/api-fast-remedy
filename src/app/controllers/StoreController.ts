@@ -314,6 +314,23 @@ class StoreController {
 		}
 	}
 
+	static async updateAvailability(req, res) {
+		const { id } = req.params;
+		const { availabilityProduct } = req.body;
+
+		try {
+			await ProductsModel.findOneAndUpdate(
+				{ _id: id },
+				{ availabilityProduct: availabilityProduct }
+			);
+			// @ts-ignore
+			return res.json();
+		} catch (error) {
+			// @ts-ignore
+			return res.status(404).json({ message: 'Dados não encontrados.' });
+		}
+	}
+
 	static async deleteProductStore(req, res) {
 		const { id } = req.params;
 

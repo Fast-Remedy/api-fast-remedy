@@ -104,6 +104,7 @@ routes.get('/api/products/stores/:id', existIdStore, StoreController.getAllProdu
 routes.get('/api/products/:id', StoreController.getOneProduct);
 routes.post('/api/register/product/stores', existIdStore, auth, StoreController.createProductStore);
 routes.put('/api/update/product/stores/:id', auth, StoreController.updateProductStore);
+routes.patch('/api/change/product/stores/:id', auth, StoreController.updateAvailability);
 routes.delete('/api/delete/product/stores/:id', auth, StoreController.deleteProductStore);
 
 // Address
