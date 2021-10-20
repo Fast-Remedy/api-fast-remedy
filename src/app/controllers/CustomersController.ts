@@ -158,7 +158,7 @@ class CustomersController {
 		} = req.body;
 
 		try {
-			await AddressCustomersModel.create({
+			const result = await AddressCustomersModel.create({
 				streetNameCustomer,
 				streetNumberCustomer,
 				complementCustomer,
@@ -169,7 +169,7 @@ class CustomersController {
 				idCustomer,
 			});
 
-			return res.json();
+			return res.json(result);
 		} catch (error) {
 			// @ts-ignore
 			return res.status(500).json({ message: 'Não foi possível registrar o endereço do usuário.' });
@@ -254,7 +254,7 @@ class CustomersController {
 		} = req.body;
 
 		try {
-			await CardCustomersModel.create({
+			const result = await CardCustomersModel.create({
 				cardTypeCustomers,
 				cardNumberCustomers,
 				cardExpirationDateCustomers,
@@ -265,7 +265,7 @@ class CustomersController {
 				idCustomer,
 			});
 
-			return res.json();
+			return res.json(result);
 		} catch (error) {
 			// @ts-ignore
 			return res.status(500).json({ message: 'Não foi possível registrar o cartão do usuário.' });
