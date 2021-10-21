@@ -26,9 +26,10 @@ class CustomersController {
 			.createHmac('sha512', `${process.env.ENCRYPT_KEY}`)
 			.update(passwordCustomer)
 			.digest('base64');
-		const user = await CustomersModel.findOne({ emailCustomer }).select('+passwordCustomer');
-		const password = await CustomersModel.findOne({ passwordCustomer: encryptedPassword });
-		const userList = await CustomersModel.findOne({ emailCustomer });
+
+		const user = await CustomersModel.find({ emailCustomer }).select('+passwordCustomer');
+		const password = await CustomersModel.find({ passwordCustomer: encryptedPassword });
+		const userList = await CustomersModel.find({ emailCustomer });
 
 		if (!user) return res.status(400).json({ message: 'Usuário não encontrado' });
 		if (!password) return res.status(400).json({ message: 'Senha invalida' });
@@ -104,7 +105,7 @@ class CustomersController {
 	static async updatePasswordCustomer(req, res) {
 		const { id } = req.params;
 		// @ts-ignore
-		let { _id, passwordCustomer } = req.body;
+		let { passwordCustomer } = req.body;
 
 		const encryptedPassword = crypto
 			.createHmac('sha512', `${process.env.ENCRYPT_KEY}`)
