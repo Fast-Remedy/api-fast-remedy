@@ -27,9 +27,9 @@ class CustomersController {
 			.update(passwordCustomer)
 			.digest('base64');
 
-		const user = await CustomersModel.find({ emailCustomer }).select('+passwordCustomer');
-		const password = await CustomersModel.find({ passwordCustomer: encryptedPassword });
-		const userList = await CustomersModel.find({ emailCustomer });
+		const user = await CustomersModel.findOne({ emailCustomer }).select('+passwordCustomer');
+		const password = await CustomersModel.findOne({ passwordCustomer: encryptedPassword });
+		const userList = await CustomersModel.findOne({ emailCustomer });
 
 		if (!user) return res.status(400).json({ message: 'Usuário não encontrado' });
 		if (!password) return res.status(400).json({ message: 'Senha invalida' });
