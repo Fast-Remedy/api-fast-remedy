@@ -157,7 +157,7 @@ class StoreController {
 		await validate(req, res);
 
 		try {
-			await StoresModel.findOneAndUpdate(
+			await StoresModel.findByIdAndUpdate(
 				{ _id: id },
 				{
 					emailStore,
@@ -196,7 +196,7 @@ class StoreController {
 		await validate(req, res);
 
 		try {
-			await StoresModel.findOneAndUpdate(
+			await StoresModel.findByIdAndUpdate(
 				{ _id: id },
 				{
 					passwordStore: encryptedPassword,
@@ -292,7 +292,7 @@ class StoreController {
 		} = req.body;
 
 		try {
-			await ProductsModel.findOneAndUpdate(
+			await ProductsModel.findByIdAndUpdate(
 				{ _id: id },
 				{
 					categoryProduct,
@@ -317,7 +317,7 @@ class StoreController {
 		const { availabilityProduct } = req.body;
 
 		try {
-			await ProductsModel.findOneAndUpdate(
+			await ProductsModel.findByIdAndUpdate(
 				{ _id: id },
 				{ availabilityProduct: availabilityProduct }
 			);

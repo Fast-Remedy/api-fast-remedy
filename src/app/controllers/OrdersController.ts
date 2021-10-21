@@ -130,7 +130,7 @@ class OrdersController {
 		const { statusOrder } = req.body;
 
 		try {
-			await OrdersModel.findOneAndUpdate({ _id: id }, { statusOrder: statusOrder });
+			await OrdersModel.findByIdAndUpdate({ _id: id }, { statusOrder: statusOrder });
 			// @ts-ignore
 			return res.json();
 		} catch (error) {

@@ -83,7 +83,7 @@ class CustomersController {
 		await validate(req, res);
 
 		try {
-			await CustomersModel.findOneAndUpdate(
+			await CustomersModel.findByIdAndUpdate(
 				{ _id: id },
 				{
 					registrationDateCustomer,
@@ -114,7 +114,7 @@ class CustomersController {
 		await validate(req, res);
 
 		try {
-			await CustomersModel.findOneAndUpdate(
+			await CustomersModel.findByIdAndUpdate(
 				{ _id: id },
 				{
 					passwordCustomer: encryptedPassword,
@@ -192,7 +192,7 @@ class CustomersController {
 		await validate(req, res);
 
 		try {
-			await AddressCustomersModel.findOneAndUpdate(
+			await AddressCustomersModel.findByIdAndUpdate(
 				{ _id: id },
 				{
 					streetNameCustomer,
@@ -288,7 +288,7 @@ class CustomersController {
 		await validate(req, res);
 
 		try {
-			await CardCustomersModel.findOneAndUpdate(
+			await CardCustomersModel.findByIdAndUpdate(
 				{ _id: id },
 				{
 					cardTypeCustomers,
