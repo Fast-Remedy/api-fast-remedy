@@ -78,8 +78,7 @@ class CustomersController {
 	static async updateCustomer(req, res) {
 		const { id } = req.params;
 		// @ts-ignore
-		let { _id, registrationDateCustomer, phoneCustomer, nameCustomer, emailCustomer, cpfCustomer } =
-			req.body;
+		let { _id, registrationDateCustomer, phoneCustomer, nameCustomer, emailCustomer } = req.body;
 
 		await validate(req, res);
 
@@ -91,7 +90,6 @@ class CustomersController {
 					phoneCustomer,
 					nameCustomer,
 					emailCustomer,
-					cpfCustomer,
 				}
 			);
 

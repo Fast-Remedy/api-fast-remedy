@@ -139,7 +139,6 @@ class StoreController {
 		const { id } = req.params;
 		// @ts-ignore
 		let {
-			cnpjStore,
 			imageStore,
 			deliveryMode,
 			bankNumber,
@@ -161,7 +160,6 @@ class StoreController {
 			await StoresModel.findOneAndUpdate(
 				{ _id: id },
 				{
-					cnpjStore,
 					emailStore,
 					companyNameStore,
 					tradingNameStore,
