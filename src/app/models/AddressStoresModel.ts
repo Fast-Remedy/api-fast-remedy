@@ -1,19 +1,11 @@
 import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
-	idStore: {
+	streetNameStore: {
 		type: String,
 		required: true,
 	},
-	stateStore: {
-		type: String,
-		required: true,
-	},
-	cityStore: {
-		type: String,
-		required: true,
-	},
-	neighborhoodStore: {
+	streetNumberStore: {
 		type: String,
 		required: true,
 	},
@@ -21,7 +13,19 @@ const Schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	streetNumberStore: {
+	neighborhoodStore: {
+		type: String,
+		required: true,
+	},
+	cityStore: {
+		type: String,
+		required: true,
+	},
+	stateStore: {
+		type: String,
+		required: true,
+	},
+	idStore: {
 		type: String,
 		required: true,
 	},
