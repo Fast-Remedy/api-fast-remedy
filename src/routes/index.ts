@@ -24,7 +24,12 @@ routes.post(
 	uniqueCpfCustomer,
 	CustomersController.createCustomer
 );
-routes.put('/api/update/customers/:id', auth, CustomersController.updateCustomer);
+routes.put(
+	'/api/update/customers/:id',
+	uniqueEmailCustomer,
+	auth,
+	CustomersController.updateCustomer
+);
 routes.patch(
 	'/api/update/customers/password/:id',
 	auth,
@@ -83,13 +88,7 @@ routes.get('/api/stores/:id', auth, StoreController.getOneStore);
 routes.get('/api/stores/:id/delivery', existIdStore, auth, StoreController.getDeliveryStore);
 routes.post('/api/login/stores', StoreController.loginStore);
 routes.post('/api/register/stores', uniqueEmailStore, uniqueCnpjStore, StoreController.createStore);
-routes.put(
-	'/api/update/stores/:id',
-	uniqueEmailStore,
-	uniqueCnpjStore,
-	auth,
-	StoreController.updateStore
-);
+routes.put('/api/update/stores/:id', uniqueEmailStore, auth, StoreController.updateStore);
 routes.patch(
 	'/api/update/stores/password/:id',
 	uniqueEmailStore,
