@@ -7,6 +7,8 @@ export async function uniqueEmailCustomer(req, res, next) {
 
 	const hasEmail = await CustomersModel.findOne({ emailCustomer });
 
+	console.log(hasEmail);
+
 	if (hasEmail._id !== id) {
 		return res.status(409).json({ error: 'Esse email já está cadastrado.' });
 	}

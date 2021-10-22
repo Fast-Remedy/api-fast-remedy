@@ -186,7 +186,7 @@ class StoreController {
 	static async updatePasswordStore(req, res) {
 		const { id } = req.params;
 		// @ts-ignore
-		let { _id, passwordStore } = req.body;
+		let { passwordStore } = req.body;
 
 		const encryptedPassword = crypto
 			.createHmac('sha512', `${process.env.ENCRYPT_KEY}`)
