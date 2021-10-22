@@ -380,7 +380,12 @@ class StoreController {
 			return res.json();
 		} catch (error) {
 			// @ts-ignore
-			return res.status(500).json({ message: 'Não foi possível registrar o endereço da loja.' });
+			return res
+				.status(500)
+				.json({
+					message: 'Não foi possível registrar o endereço da loja.',
+					message2: error.message,
+				});
 		}
 	}
 
