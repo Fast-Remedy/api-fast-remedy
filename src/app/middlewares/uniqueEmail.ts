@@ -16,11 +16,13 @@ export async function uniqueEmailCustomer(req, res, next) {
 }
 
 export async function uniqueEmailStore(req, res, next) {
+	const { id } = req.params;
 	const { emailStore } = req.body;
 
 	const hasEmail = await StoresModel.findOne({ emailStore });
 
-	console.log(hasEmail);
+	console.log(hasEmail._id);
+	console.log(id);
 
 	if (hasEmail) {
 		return res.status(409).json({ error: 'Esse email já está cadastrado.' });
