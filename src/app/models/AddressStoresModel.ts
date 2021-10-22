@@ -11,7 +11,7 @@ const Schema = new mongoose.Schema({
 	},
 	complementStore: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	neighborhoodStore: {
 		type: String,
